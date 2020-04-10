@@ -11,15 +11,18 @@ class Reviews():
     def make(self):
         for review in self.__review_list():
             item = {
-                'code' : self.__code(review),
-                'name' : self.__author(review),
-                'avatar' : self.__avatar(review),
-                'star' : self.__star(review),
-                'name' : self.__name(review),
-                'review_short' : self.__review_short(review)
+                'code': self.__code(review),
+                'author': self.__author(review),
+                'avatar': self.__avatar(review),
+                'star': self.__star(review),
+                'name': self.__name(review),
+                'review_short': self.__review_short(review),
             }
             self.items.append(item)
-        print(self.items)
+        return {
+            'book': self.__book(),
+            'items': self.items
+        }
 
     def __review_list(self):
         return self.crawl.soup().select('div.review-list>div')
@@ -45,7 +48,24 @@ class Reviews():
         review_id = review.select('div.review-short')[0]['id']
         return re.search(r'\d+', review_id).group()
 
+    def __book(self):
+        aside = self.crawl.soup().select('div.aside>div.sidebar-info-wrapper')[0]
+        book_info_list =  aside.select('div.subject-info ul.info-list li.info-item')
 
+        name = aside.select('div.subject-title a')[0].get_text()
+        pic = aside.select('div.subject-img a img')[0]['src']
+        author = book_info_list[0].select('span.info-item-val')[0].get_text()
+        publisher = book_info_list[1].select('span.info-item-val')[0].get_text()
+        prize = book_info_list[2].select('span.info-item-val')[0].get_text()
+        pages = book_info_list[4].select('span.info-item-val')[0].get_text()
+        date = book_info_list[5].select('span.info-item-val')[0].get_text()
 
-# t = Reviews(1007305,25)
-# (t.make())
+        return {
+            'name': name,
+            'pic': pic,
+            'author': author,
+            'publish': publisher,
+            'prize': prize,
+            'pages': pages,
+            'date': date
+        }
