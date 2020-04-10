@@ -16,10 +16,10 @@ class CrawlTools():
     def trim(text):
         return "".join(text.split())
 
-    def __get(self):
+    def get(self):
         res = requests.get(self.url, headers=self.headers)
         return res.text
 
     def soup(self):
-        return BeautifulSoup(self.__get(), 'html.parser')
+        return BeautifulSoup(self.get(), 'html.parser')
 
