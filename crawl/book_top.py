@@ -24,7 +24,7 @@ class BookTop:
            self.items.append(item)
         return self.items
 
-    def __getInfo(self):
+    def items(self):
         return self.items
 
     def __tables(self):
@@ -37,12 +37,11 @@ class BookTop:
         return self.crawl.trim(table.select('.pl')[0].get_text())
 
     def __link(self,table):
-        return  table.select(".pl2 a")[0]['href']
+        return table.select(".pl2 a")[0]['href']
 
     def __subject(self,table):
         link = self.__link(table)
         return re.search(r'(?<=/subject/)\d+', link).group()
-
 
     def __pic(self,table):
         return table.select("td a img")[0]['src']
