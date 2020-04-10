@@ -1,5 +1,5 @@
 from crawl.crawl_tools import CrawlTools
-
+import re
 
 class BookTop:
 
@@ -14,6 +14,7 @@ class BookTop:
            item = {
                'book' : self.__book_name(table),
                'link' : self.__link(table),
+               'subject' : self.__subject(table),
                'author' : self.__author(table),
                'pic' : self.__pic(table),
                'rating_num': self.__rating_num(table)
@@ -36,10 +37,18 @@ class BookTop:
         return self.crawl.trim(table.select('.pl')[0].get_text())
 
     def __link(self,table):
-        return table.select(".pl2 a")[0]['href']
+        return  table.select(".pl2 a")[0]['href']
+
+    def __subject(self,table):
+        link = self.__link(table)
+        return re.search(r'(?<=/subject/)\d+', link).group()
+
 
     def __pic(self,table):
         return table.select("td a img")[0]['src']
 
     def __rating_num(self,table):
        return table.select("span.rating_nums")[0].get_text()
+
+# t = BookTop()
+# print(t.make())
