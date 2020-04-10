@@ -4,7 +4,8 @@ from crawl.search import Search
 from crawl.book_top import BookTop
 from crawl.reviews import Reviews
 from crawl.review import Review
-
+# 同源策略
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -54,3 +55,6 @@ def resp(data):
 
 if __name__ == '__main__':
     app.run()
+
+# 同源策略
+CORS(app, resources={r"/*": {"origins": "*"}})
