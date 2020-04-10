@@ -14,5 +14,5 @@ class Review():
         return str(self.crawl.select('div#link-report>div.review-content')[0])
 
 
-t = Review(12425970)
-print(t.make())
+# t = Review(12425970)
+# print(t.make())
