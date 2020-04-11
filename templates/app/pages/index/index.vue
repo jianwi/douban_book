@@ -1,8 +1,34 @@
 <template>
+
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
+		
+		<view class="uni-form-item">
+			<input type="text" class="uni-input bottom-border" placeholder="请输入书籍名称搜索" />
+		</view>
+		
+		<view class="uni-flex flex-row book-container uni-center">
+			<view class="uni-flex-item" v-for="(book,index) of books" :data-subject="book.subject" @click="reviewsList">
+				<view class="book">
+					<view>
+						<image mode="aspectFit" :src="book.pic"></image>
+					</view>
+					<view>
+						<text class="uni-h4">{{ book.book }}</text>
+					</view>
+					<view>
+						评分 ：<text>{{ book.rating_num }}</text>
+					</view>
+					<view>
+						<text class="uni-h5">{{ book.author }}</text>
+					</view>
+				</view>
+
+			</view>
+		</view>
+
+
 		<view class="text-area">
-			<text class="title">{{title}}</text>
+
 		</view>
 	</view>
 </template>
@@ -11,42 +37,44 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				books: [{
+					'name': 'xx'
+				}]
 			}
 		},
 		onLoad() {
-
+			uni.request({
+				url: 'http://47.102.212.210:5000/top250',
+				success: (res) => {
+					this.books = res.data.data
+				}
+			})
 		},
 		methods: {
+			reviewsList(data){
+				console.log(data)
+				uni.navigateTo({
+					url:'../reviews/reviews?id=' + data.currentTarget.dataset.subject
+				})
+			}
 
 		}
 	}
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+	.book-container {
+		flex-wrap: wrap;
+		padding: 20rpx;
 	}
 
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
+	.book {
+		border: solid 1px #D1ECF1;
+		margin: 1px;
 	}
 
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+	image {
+		margin: 1upx 1px;
+		width: 300upx;
 	}
 </style>
