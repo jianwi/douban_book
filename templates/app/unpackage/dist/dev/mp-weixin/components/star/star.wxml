@@ -1,0 +1,1 @@
+<view class="uni-flex star-container"><block wx:for="{{star_count}}" wx:for-item="i" wx:for-index="__i0__"><text style="font-size:0.6em;">♥</text></block></view>

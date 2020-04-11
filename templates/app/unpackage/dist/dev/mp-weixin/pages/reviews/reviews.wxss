@@ -1,0 +1,37 @@
+
+.book_pic {
+	width: 255rpx;
+	height: 355rpx;
+	margin: 2px;
+}
+.review-container {
+	border-bottom: 2px #9FCDFF dashed;
+	padding-bottom: 5px;
+	margin-bottom: 9px;
+}
+.avatar {
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+	margin-right: 10px;
+}
+.avatar-container {
+	padding: 3px;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.review-title {
+	font-size: 1.2em;
+	font-weight: 800;
+	color: #0069D9;
+}
+.base-center {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+
