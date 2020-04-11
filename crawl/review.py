@@ -12,7 +12,8 @@ class Review():
         return {
             'title': self.__title(),
             'content': self.__content(),
-            'book': self.__book()
+            'book': self.__book(),
+            'author': self.__author()
         }
 
     def __content(self):
@@ -20,6 +21,16 @@ class Review():
 
     def __title(self):
         return self.crawl.select('div.article>h1>span')[0].get_text()
+
+    def __author(self):
+        avatar = self.crawl.select('a.author-avatar img')[0]['src']
+        name = self.crawl.select('header.main-hd>a>span')[0].get_text()
+        star = self.crawl.select('header.main-hd>span.main-title-hide')[0].get_text()
+        return {
+            'avatar': avatar,
+            'name': name,
+            'star': star
+        }
 
     def __book(self):
         aside = self.crawl.select('div.sidebar-info-wrapper')[0]
@@ -43,6 +54,5 @@ class Review():
             'date': date
         }
 
-
-# t = Review(12425970)
+# t = Review(4537935)
 # print(t.make())
