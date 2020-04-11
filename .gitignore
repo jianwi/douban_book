@@ -1,3 +1,5 @@
 venv
 .idea
 .gitignore
+__pycache__
+crawl/__pycache__
