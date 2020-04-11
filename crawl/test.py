@@ -2,10 +2,10 @@ import asyncio
 from pyppeteer import launch
 
 async def main():
-    browser = await launch()
+    browser = await launch(options={'args': ['--no-sandbox']})
     page = await browser.newPage()
-    await page.goto('https://search.douban.com/book/subject_search?search_text=mysql&cat=1001&start=15')
-    print(page)
+    await page.goto('http://jianwi.cn')
+    
     await page.screenshot({'path': 'example.png'})
 
     await browser.close()
