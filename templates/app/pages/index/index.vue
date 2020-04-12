@@ -25,9 +25,6 @@
 					</view>
 				</view>
 			</view>
-			<view v-show="!search_book" class="book uni-flex-item uni-padding-wrap">
-				加载中。。。请稍后
-			</view>
 		</view>
 	</view>
 </template>
@@ -47,21 +44,29 @@
 		},
 		onReachBottom() {
 			console.log('触底')
+			uni.showLoading({
+				title:"正在拼命加载中..."
+			})
 			if (this.search_book) return
 			this.start += 25
 			uni.request({
 				url: 'http://47.102.212.210:5000/top250/' + this.start,
 				success: (res) => {
 					this.books = this.books.concat(res.data.data)
+					uni.hideLoading()
 				}
 			})
 		},
 		methods: {
 			loadBooks() {
+				uni.showLoading({
+					title:"正在拼命加载中..."
+				})
 				uni.request({
 					url: 'http://47.102.212.210:5000/top250',
 					success: (res) => {
 						this.books = res.data.data
+						uni.hideLoading()
 					}
 				})
 			},
@@ -72,6 +77,9 @@
 				})
 			},
 			searchBook(data) {
+				uni.showLoading({
+					title:"正在拼命搜索中..."
+				})
 				var value = data.target.value
 				if (value == "") {
 					this.start = 0
@@ -88,6 +96,7 @@
 					url: 'http://47.102.212.210:5000/search/' + value,
 					success: (res) => {
 						this.books = res.data.data
+						uni.hideLoading()
 						if(this.books.length == 0){
 							this.message = "没有搜索到任何结果。。。"
 						}

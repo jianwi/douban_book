@@ -5,7 +5,7 @@
 		<!-- 作者信息 -->
 		<view></view>
 		<!-- 书评内容 -->
-		<view class="review-content">
+		<view v-show="book" class="review-content">
 			<view class="uni-h3 uni-center">{{ title }}</view>
 			
 			<view class="uni-flex uni-row avatar-container">
@@ -24,7 +24,7 @@
 	export default {
 		data() {
 			return {
-				book: {},
+				book: null,
 				review: '',
 				title: '',
 				author: {}
@@ -34,6 +34,9 @@
 
 		},
 		onLoad(e) {
+			uni.showLoading({
+				title:"加载中，请稍后"
+			})
 			console.log(e)
 			uni.request({
 				url: "http://47.102.212.210:5000/review/" + e.code,
@@ -42,6 +45,7 @@
 					this.book = res.data.data.book
 					this.author = res.data.data.author
 					this.title = res.data.data.title
+					uni.hideLoading()
 				}
 			})
 		}

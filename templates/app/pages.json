@@ -3,22 +3,26 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "看书评"
+				"navigationBarTitleText": "书籍列表"
 			}
 		}
 	    ,{
             "path" : "pages/reviews/reviews",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"书评列表"
+			}
         }
         ,{
             "path" : "pages/review/review",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"书评详情"
+			}
         }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarTitleText": "书评",
+		"navigationBarBackgroundColor": "#00c4ff",
 		"backgroundColor": "#F8F8F8"
 	}
 }
