@@ -1,5 +1,4 @@
 from crawl.crawl_tools import CrawlTools
-import re
 
 
 class Review:
@@ -8,7 +7,6 @@ class Review:
         self.crawl = CrawlTools(self.url).soup()
 
     def make(self):
-
         return {
             'title': self.__title(),
             'content': self.__content(),
@@ -43,8 +41,6 @@ class Review:
         prize = book_info_list[2].select('span.info-item-val')[0].get_text()
         pages = book_info_list[4].select('span.info-item-val')[0].get_text()
         date = book_info_list[5].select('span.info-item-val')[0].get_text()
-
-
 
         return {
             'name': name[2:],

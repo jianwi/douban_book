@@ -39,13 +39,17 @@ class Reviews:
         star_class_str = "".join(star_class)
         return re.search(r'\d',star_class_str).group()
 
-    def __name(self,review):
+    @staticmethod
+    def __name(review):
         return review.select('.main-bd h2 a')[0].get_text()
 
-    def __review_short(self,review):
-        return review.select('div.review-short div.short-content')[0].get_text()
+    @staticmethod
+    def __review_short(review):
+        text = review.select('div.review-short div.short-content')[0].get_text()
+        return text[:-30]
 
-    def __code(self,review):
+    @staticmethod
+    def __code(review):
         review_id = review.select('div.review-short')[0]['id']
         return re.search(r'\d+', review_id).group()
 
@@ -70,3 +74,7 @@ class Reviews:
             'pages': pages,
             'date': date
         }
+
+
+# t = Reviews(1007305)
+# t.make()
