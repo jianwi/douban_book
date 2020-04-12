@@ -39,6 +39,11 @@ def book_info(subject):
     return resp(book.make())
 
 
+@app.route('/book/<subject>/<start>')
+def book_info_more(subject,start):
+    book = Reviews(subject,start)
+    return resp(book.make())
+
 @app.route('/review/<code>')
 def review(code):
     review = Review(code)
