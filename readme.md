@@ -1,16 +1,14 @@
 # 豆瓣书评爬虫项目
 ## 目录/文件说明
 crawl目录为爬虫目录
-	book_top.py 爬取 豆瓣读书top250
-	review.py 爬取书评信息
-	reviews.py 爬取书评列表
-	search.py 图书搜索
-	crawl_tools.py 封装的爬虫工具类
-
-templates 目录为前端文件
-	app 是 uniapp 应用 ，使用 Hbuilderx 即可发布为手机app
-	
-app.py 是 flask 启动文件，在这个文件里定义了api路由
+1. book_top.py 爬取 豆瓣读书top250
+2. review.py 爬取书评信息
+3. reviews.py 爬取书评列表
+4. search.py 图书搜索
+5. crawl_tools.py 封装的爬虫工具类
+6. templates 目录为前端文件
+7. app 是 uniapp 应用 ，使用 Hbuilderx 即可发布为手机app
+8. app.py 是 flask 启动文件，在这个文件里定义了api路由
 
 ## 使用
 ### 确保你已经安装了以下包
