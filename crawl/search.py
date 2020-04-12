@@ -13,6 +13,10 @@ class Search:
         books = json.loads(self.crawl.get())
         items = []
         for book in books:
+
+            if book['type'] == 'a':
+                continue
+
             items.append({
                 'book': book['title'],
                 'subject': book['id'],
