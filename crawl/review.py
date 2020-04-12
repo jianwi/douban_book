@@ -2,7 +2,7 @@ from crawl.crawl_tools import CrawlTools
 import re
 
 
-class Review():
+class Review:
     def __init__(self,code):
         self.url = 'https://book.douban.com/review/' + str(code)
         self.crawl = CrawlTools(self.url).soup()

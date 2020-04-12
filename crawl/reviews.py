@@ -1,7 +1,8 @@
 from crawl.crawl_tools import CrawlTools
 import re
 
-class Reviews():
+
+class Reviews:
 
     def __init__(self,subject,start=0):
         self.url = 'https://book.douban.com/subject/'+ str(subject) +'/reviews?start=' + str(start)
