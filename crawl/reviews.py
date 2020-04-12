@@ -62,7 +62,7 @@ class Reviews:
         date = book_info_list[5].select('span.info-item-val')[0].get_text()
 
         return {
-            'name': name,
+            'name': name[2:],
             'pic': pic,
             'author': author,
             'publish': publisher,
