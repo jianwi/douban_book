@@ -37,6 +37,7 @@
 				start: 0,
 				message: '豆瓣读书 Top 250',
 				search_book: false,
+				hasMore: true,
 			}
 		},
 		onLoad() {
@@ -44,10 +45,11 @@
 		},
 		onReachBottom() {
 			console.log('触底')
-			uni.showLoading({
-				title:"正在拼命加载中..."
-			})
 			if (this.search_book) return
+
+			uni.showLoading({
+				title: "正在拼命加载中..."
+			})
 			this.start += 25
 			uni.request({
 				url: 'http://47.102.212.210:5000/top250/' + this.start,
@@ -59,56 +61,64 @@
 		},
 		methods: {
 			loadBooks() {
+				
 				uni.showLoading({
-					title:"正在拼命加载中..."
+					title: "正在拼命加载中..."
 				})
 				uni.request({
-					url: 'http://47.102.212.210:5000/top250',
-					success: (res) => {
-						this.books = res.data.data
-						uni.hideLoading()
-					}
-				})
-			},
-			reviewsList(data) {
-				console.log(data)
-				uni.navigateTo({
-					url: '../reviews/reviews?id=' + data.currentTarget.dataset.subject
-				})
-			},
-			searchBook(data) {
-				uni.showLoading({
-					title:"正在拼命搜索中..."
-				})
-				var value = data.target.value
-				if (value == "") {
-					this.start = 0
-					this.books = []
-					this.message = '豆瓣读书 Top 250'
-					this.search_book = false
-					this.loadBooks()
-					return
-				}
-				// console.log(data)
-				this.message = '搜索结果'
-				this.search_book = true
-				uni.request({
-					url: 'http://47.102.212.210:5000/search/' + value,
-					success: (res) => {
-						this.books = res.data.data
-						uni.hideLoading()
-						if(this.books.length == 0){
-							this.message = "没有搜索到任何结果。。。"
-						}
+							url: 'http://47.102.212.210:5000/top250',
+							success: (res) => {
+								if (res.statusCode == 500) {
+									this.hasMore = false
+									uni.showToast({
+										icon: 'none',
+										title: "抱歉！没有更多书籍了",
+									})}
+									
+									this.books = res.data.data
+									uni.hideLoading()
+								}
+							})
 					},
-					fail() {
-						this.message = '发生了错误，请稍后再试'
+					reviewsList(data) {
+						console.log(data)
+						uni.navigateTo({
+							url: '../reviews/reviews?id=' + data.currentTarget.dataset.subject
+						})
+					},
+					searchBook(data) {
+						uni.showLoading({
+							title: "正在拼命搜索中..."
+						})
+						var value = data.target.value
+						if (value == "") {
+							this.start = 0
+							this.books = []
+							this.message = '豆瓣读书 Top 250'
+							this.search_book = false
+							this.loadBooks()
+							return
+						}
+						// console.log(data)
+						this.message = '搜索结果'
+						this.search_book = true
+						uni.request({
+							url: 'http://47.102.212.210:5000/search/' + value,
+							success: (res) => {
+								this.books = res.data.data
+								uni.hideLoading()
+								if (this.books.length == 0) {
+									this.message = "没有搜索到任何结果。。。"
+								}
+							},
+							fail() {
+								this.message = '发生了错误，请稍后再试'
+							}
+						})
 					}
-				})
-			}
 
+			}
 		}
-	}
 </script>
 
 <style>

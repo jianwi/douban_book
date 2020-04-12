@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "书评列表",
+  "usingComponents": {
+    "star": "/components/star/star"
+  }
+}

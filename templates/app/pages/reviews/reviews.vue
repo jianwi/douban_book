@@ -6,7 +6,7 @@
 			</view>
 
 			<view class="uni-flex-item uni-column uni-flex  uni-container" style="padding-top: 12upx;">
-				<text class="uni-h3">{{ book.name }}</text>
+				<text class="uni-h4">{{ book.name }}</text>
 				<text class="uni-h5">{{ book.author }}</text>
 				<text class="uni-h5">{{ book.publish }}</text>
 				<text class="uni-h5">价格： {{ book.prize }}</text>
@@ -64,7 +64,6 @@
 		},
 		methods: {
 			goReviewDetail(e) {
-				console.log(e)
 				var code = e.currentTarget.dataset.code
 
 				uni.navigateTo({

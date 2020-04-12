@@ -1,0 +1,1 @@
+input{border:#20c997 solid 1px;margin:20rpx}.book-container{-webkit-flex-wrap:wrap;flex-wrap:wrap;padding:20rpx}.book{border:solid 1px #d1ecf1;margin:1px;min-height:50rpx}image{margin:1rpx 1px;width:300rpx}.title{margin:10rpx;padding:15rpx;border-radius:10px}
